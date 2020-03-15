@@ -1,0 +1,22 @@
+﻿<nav>
+	<b style="color:#909;font-size:1.5em;">MD EDIT</b>
+	<a href="../">Vanilla</a>
+	<a href=@ve>Vue.js</a>
+	<NavLink Match="NavLinkMatch.All" href="./">Blazor</NavLink>
+	<a href=@ng>Angular</a>
+	<a href="https://github.com/yosgspec/SimpleMarkdownEdit">GitHub</a>
+</nav>
+
+<style>
+nav .active{
+	color: #FF0000;
+	font-weight: bold;
+}
+</style>
+
+@inject NavigationManager nav;
+
+@code{
+	string ve{get{return nav.Uri.Replace("/br/","/ve/");}}
+	string ng{get{return nav.Uri.Replace("/br/","/ng/");}}
+}

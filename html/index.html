@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang=ja>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name=viewport content="width=device-width,initial-scale=1.0">
+	<title>Simple Markdown Edit</title>
+	<link rel=icon href="./favicon.ico">
+	<link rel=stylesheet href="./mplus-1mn.css">
+	<link rel=stylesheet href="./vs.css">
+	<script src="./highlight.packall.js"></script>
+	<script src="./markdown-it.min.js"></script>
+	<style>
+	main{
+		display: flex;
+		justify-content: space-between;
+		height: 92vh;
+		width: 100%;
+	}
+	textarea#txt,div#md2html{
+		width:50%;
+		margin:5px;
+	}
+	div#md2html{
+		overflow-y: scroll;
+	}
+	textarea#txt,div#md2html code{
+		font-family: "M+ 1mn";
+		font-size: 1.1em;
+	}
+	div#md2html code{
+		border: 1px solid #CCC;
+	}
+	</style>
+</head>
+
+<body>
+<nav>
+	<b style="color:#999;font-size:1.5em;">MD EDIT</b>
+	<a style="color:#FF0000;font-weight:bold;">Vanilla</a>
+	<a href="./ve">Vue.js</a>
+	<a href="./br">Blazor</a>
+	<a href="./ng">Angular</a>
+	<a href="https://github.com/yosgspec/SimpleMarkdownEdit">GitHub</a>
+</nav>
+<hr>
+<main>
+	<textarea id=txt></textarea>
+	<hr>
+	<div id=md2html></div>
+</main>
+
+<script>
+const md=markdownit({html: true});
+const txt=document.getElementById("txt");
+const md2html=document.getElementById("md2html");
+txt.addEventListener("input",()=>{
+	md2html.innerHTML=md.render(txt.value.replace(/\n/g,"  \n"));
+	hljs.initHighlighting.called=false;
+	hljs.initHighlighting();
+});
+
+(()=>{
+	txt.value=
+`# TEST TITLE
+
+*<span style=color:#999999>Say</span>*
+**<u>Hello!</u>**
+
+\`\`\`js
+for(let i=0;i<100;i++){
+	console.log(i);
+}
+\`\`\`
+`;
+	txt.dispatchEvent(new Event("input"));
+})();
+</script>
+</body>
+
+</html>

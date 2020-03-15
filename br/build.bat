@@ -1,0 +1,2 @@
+@csi ./build.csx
+@pause

@@ -1,0 +1,52 @@
+﻿@page "/"
+
+<div id=index>
+	<textarea @bind-value="txt" @bind-value:event="oninput"></textarea>
+	<hr>
+	<div v-html="md.render(txt)">@((MarkupString)Markdown.ToHtml(txt.Replace("\n","  \n")))</div>
+</div>
+
+<style>
+div#index{
+	display: flex;
+	justify-content: space-between;
+	height: 92vh;
+	width: 100%;
+}
+#index textarea,#index div{
+	width:50%;
+	margin:5px;
+}
+#index div{
+	overflow-y: scroll;
+}
+#index textarea,#index code{
+	font-family: "M+ 1mn";
+	font-size: 1.1em;
+}
+#index code{
+	border: 1px solid #CCC;
+}
+</style>
+
+@using Markdig;
+@inject IJSRuntime js;
+
+@code{
+	string txt=
+@"# TEST TITLE
+
+*<span style=color:#990099>Say</span>*
+**<u>Hello!</u>**
+
+```cs
+for(int i=0;i<100;i++){
+	console.log(i);
+}
+```
+";
+	protected override async Task OnAfterRenderAsync(bool firstRender){
+		await js.InvokeVoidAsync("eval","hljs.initHighlighting.called=false");
+		await js.InvokeVoidAsync("hljs.initHighlighting");
+	}
+}
