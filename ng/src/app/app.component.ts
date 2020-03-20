@@ -1,9 +1,19 @@
 const template=`
 <main>
-	<NavMenu></NavMenu>
+	<header>
+		<ToolMenu></ToolMenu>
+		<NavMenu></NavMenu>
+	</header>
 	<hr>
 	<router-outlet></router-outlet>
 </main>
+
+<style>
+header{
+	display: flex;
+	justify-content: space-between;
+}
+</style>
 `;
 
 import {Component} from "@angular/core";

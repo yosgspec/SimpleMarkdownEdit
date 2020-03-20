@@ -1,6 +1,5 @@
 const template=`
 <nav>
-	<b style="color:#900;font-size:1.5em;">MD EDIT</b>{{" "}}
 	<a href="../">Vanilla</a>{{" "}}
 	<a [href]="ve">Vue.js</a>{{" "}}
 	<a [href]="br">Blazor</a>{{" "}}

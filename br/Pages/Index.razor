@@ -1,9 +1,9 @@
 ﻿@page "/"
 
 <div id=index>
-	<textarea @bind-value="txt" @bind-value:event="oninput"></textarea>
+	<textarea @bind-value="mdTxt" @bind-value:event="oninput"></textarea>
 	<hr>
-	<div v-html="md.render(txt)">@((MarkupString)Markdown.ToHtml(txt.Replace("\n","  \n")))</div>
+	<div v-html="md.render(mdTxt)">@((MarkupString)mdHtml)</div>
 </div>
 
 <style>
@@ -30,10 +30,27 @@ div#index{
 </style>
 
 @using Markdig;
+@implements IDisposable;
 @inject IJSRuntime js;
+@inject AppStore state;
 
 @code{
-	string txt=
+	protected override void OnInitialized(){state.OnChange+=StateHasChanged;}
+	public void Dispose(){state.OnChange-=StateHasChanged;}
+
+	MarkdownPipeline md=new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+	string mdTxt{
+		get{return state.mdTxt;}
+		set{
+			state.setMdTxt(value);
+			state.setMdHtml(mdHtml);
+		}
+	}
+	string mdHtml{get{return Markdown.ToHtml(mdTxt.Replace("\n","  \n"),md);}}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender){
+		if(firstRender){
+			mdTxt=
 @"# TEST TITLE
 
 *<span style=color:#990099>Say</span>*
@@ -41,11 +58,12 @@ div#index{
 
 ```cs
 for(int i=0;i<100;i++){
-	console.log(i);
+	Console.WriteLine(i);
 }
 ```
 ";
-	protected override async Task OnAfterRenderAsync(bool firstRender){
+		}
+
 		await js.InvokeVoidAsync("eval","hljs.initHighlighting.called=false");
 		await js.InvokeVoidAsync("hljs.initHighlighting");
 	}

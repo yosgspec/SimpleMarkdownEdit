@@ -1,7 +1,17 @@
 ﻿@inherits LayoutComponentBase
 
 <main>
-	<NavMenu />
+	<header>
+		<ToolMenu />
+		<NavMenu />
+	</header>
 	<hr>
 	@Body
 </main>
+
+<style>
+main > header{
+	display: flex;
+	justify-content: space-between;
+}
+</style>

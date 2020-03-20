@@ -1,5 +1,5 @@
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n<div id=index>\n\t<textarea [(ngModel)]=\"txt\"></textarea>\n\t<hr>\n\t<div [innerHTML]=\"md.render(txt.split('\n').join('  \n'))\"></div>\n</div>\n\n<style>\ndiv#index{\n\tdisplay: flex;\n\tjustify-content: space-between;\n\theight: 92vh;\n\twidth: 100%;\n}\n#index textarea,#index div{\n\twidth:50%;\n\tmargin:5px;\n}\n#index div{\n\toverflow-y: scroll;\n}\n#index textarea,::ng-deep #index code{\n\tfont-family: \"M+ 1mn\";\n\tfont-size: 1.1em;\n}\n::ng-deep #index code{\n\tborder: 1px solid #CCC;\n}\n</style>\n"], ["\n<div id=index>\n\t<textarea [(ngModel)]=\"txt\"></textarea>\n\t<hr>\n\t<div [innerHTML]=\"md.render(txt.split('\\n').join('  \\n'))\"></div>\n</div>\n\n<style>\ndiv#index{\n\tdisplay: flex;\n\tjustify-content: space-between;\n\theight: 92vh;\n\twidth: 100%;\n}\n#index textarea,#index div{\n\twidth:50%;\n\tmargin:5px;\n}\n#index div{\n\toverflow-y: scroll;\n}\n#index textarea,::ng-deep #index code{\n\tfont-family: \"M+ 1mn\";\n\tfont-size: 1.1em;\n}\n::ng-deep #index code{\n\tborder: 1px solid #CCC;\n}\n</style>\n"]);
+  const data = _taggedTemplateLiteral(["\n<div id=index>\n\t<textarea [(ngModel)]=\"mdTxt\"></textarea>\n\t<hr>\n\t<div [innerHTML]=\"mdHtml\"></div>\n</div>\n\n<style>\ndiv#index{\n\tdisplay: flex;\n\tjustify-content: space-between;\n\theight: 92vh;\n\twidth: 100%;\n}\n#index textarea,#index div{\n\twidth:50%;\n\tmargin:5px;\n}\n#index div{\n\toverflow-y: scroll;\n}\n#index textarea,::ng-deep #index code{\n\tfont-family: \"M+ 1mn\";\n\tfont-size: 1.1em;\n}\n::ng-deep #index code{\n\tborder: 1px solid #CCC;\n}\n</style>\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -698,7 +698,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
 
-    const template = "\n<main>\n\t<NavMenu></NavMenu>\n\t<hr>\n\t<router-outlet></router-outlet>\n</main>\n";
+    const template = "\n<main>\n\t<header>\n\t\t<ToolMenu></ToolMenu>\n\t\t<NavMenu></NavMenu>\n\t</header>\n\t<hr>\n\t<router-outlet></router-outlet>\n</main>\n\n<style>\nheader{\n\tdisplay: flex;\n\tjustify-content: space-between;\n}\n</style>\n";
     let AppComponent = class AppComponent {};
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: "app-root",
@@ -777,13 +777,19 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
     /* harmony import */
 
 
-    var _components_NavMenu_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _components_ToolMenu_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ./components/ToolMenu.component */
+    "./src/app/components/ToolMenu.component.ts");
+    /* harmony import */
+
+
+    var _components_NavMenu_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! ./components/NavMenu.component */
     "./src/app/components/NavMenu.component.ts");
 
     let AppModule = class AppModule {};
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"], _pages_Index_component__WEBPACK_IMPORTED_MODULE_7__["IndexComponent"], _components_NavMenu_component__WEBPACK_IMPORTED_MODULE_8__["NavMenuComponent"]],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"], _pages_Index_component__WEBPACK_IMPORTED_MODULE_7__["IndexComponent"], _components_ToolMenu_component__WEBPACK_IMPORTED_MODULE_8__["ToolMenuComponent"], _components_NavMenu_component__WEBPACK_IMPORTED_MODULE_9__["NavMenuComponent"]],
       imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"]],
       providers: [],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
@@ -823,7 +829,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
 
-    const template = "\n<nav>\n\t<b style=\"color:#900;font-size:1.5em;\">MD EDIT</b>{{\" \"}}\n\t<a href=\"../\">Vanilla</a>{{\" \"}}\n\t<a [href]=\"ve\">Vue.js</a>{{\" \"}}\n\t<a [href]=\"br\">Blazor</a>{{\" \"}}\n\t<a routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\" routerLink=\"/\">Angular</a>{{\" \"}}\n\t<a href=\"https://github.com/yosgspec/SimpleMarkdownEdit\">GitHub</a>\n</nav>\n\n<style>\n.active{\n\tcolor: #FF0000;\n\tfont-weight: bold;\n}\n</style>\n";
+    const template = "\n<nav>\n\t<a href=\"../\">Vanilla</a>{{\" \"}}\n\t<a [href]=\"ve\">Vue.js</a>{{\" \"}}\n\t<a [href]=\"br\">Blazor</a>{{\" \"}}\n\t<a routerLinkActive=\"active\" [routerLinkActiveOptions]=\"{exact:true}\" routerLink=\"/\">Angular</a>{{\" \"}}\n\t<a href=\"https://github.com/yosgspec/SimpleMarkdownEdit\">GitHub</a>\n</nav>\n\n<style>\n.active{\n\tcolor: #FF0000;\n\tfont-weight: bold;\n}\n</style>\n";
     let NavMenuComponent = class NavMenuComponent {
       get ve() {
         return location.href.replace("/ng/", "/ve/");
@@ -839,6 +845,300 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
       template: template
     })], NavMenuComponent);
     /***/
+  },
+
+  /***/
+  "./src/app/components/ToolMenu.component.ts":
+  /*!**************************************************!*\
+    !*** ./src/app/components/ToolMenu.component.ts ***!
+    \**************************************************/
+
+  /*! exports provided: ToolMenuComponent */
+
+  /***/
+  function srcAppComponentsToolMenuComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ToolMenuComponent", function () {
+      return ToolMenuComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _lib_Util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../lib/Util */
+    "./src/app/lib/Util.ts");
+    /* harmony import */
+
+
+    var _lib_Memory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../lib/Memory */
+    "./src/app/lib/Memory.ts");
+    /* harmony import */
+
+
+    var _store_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! ../store.service */
+    "./src/app/store.service.ts");
+
+    const template = "\n<div style=display:flex>\n\t<img src=\"./favicon.ico\" height=32 width=32 style=image-rendering:pixelated>\n\t<button (click)=\"newItem()\">\u2747\u65B0\u898F</button>\n\t<input placeholder=\" [\u984C\u540D]\" list=\"mdDatas\" [(ngModel)]=\"mdTitle\">\n\t<datalist id=\"mdDatas\">\n\t\t<option  *ngFor=\"let v of mdDatas | keyvalue\">{{v.key}}</option>\n\t</datalist>\n\t<button (click)=\"loadItem()\">\uD83D\uDCD6\u8AAD\u8FBC</button>\n\t<button (click)=\"saveItem()\">\uD83D\uDCBE\u4FDD\u5B58</button>\n\t<button (click)=\"deleteItem()\">\uD83D\uDEAB\u524A\u9664</button>\n\t<button (click)=\"viewFile()\">\uD83D\uDCC2\u958B\u304F</button>\n\t<input type=\"file\" accept=\".md\" id=\"uploadFile\" (change)=\"uploadFile()\" [style.display]=\"isViewFile? '': 'none'\">\n\t<button (click)=\"downloadMD()\">\uD83D\uDCF2Markdown</button>\n\t<button (click)=\"downloadHTML()\">\uD83D\uDCF2HTML</button>\n</div>\n\n<style>\n.active{\n\tcolor: #FF0000;\n\tfont-weight: bold;\n}\n</style>\n";
+    let ToolMenuComponent = class ToolMenuComponent {
+      constructor(state) {
+        this.state = state;
+        this.mdDatas = new _lib_Util__WEBPACK_IMPORTED_MODULE_2__["SortedMap"]();
+        this.mdTitleCurrent = "";
+        this.mdTitle = "";
+        this.isViewFile = false;
+      }
+
+      get mdTxt() {
+        return this.state.mdTxt;
+      }
+
+      set mdTxt(value) {
+        this.state.mdTxt = value;
+      }
+
+      get mdHtml() {
+        return this.state.mdHtml;
+      }
+
+      ngOnInit() {
+        try {
+          this.mdDatas = new _lib_Util__WEBPACK_IMPORTED_MODULE_2__["SortedMap"](_lib_Memory__WEBPACK_IMPORTED_MODULE_3__["Memory"].loadMap("mdTxts"));
+        } catch (_a) {}
+      }
+
+      newItem() {
+        if (!confirm("初期化してもよろしいですか?")) return;
+        this.mdTitleCurrent = "";
+        this.mdTitle = "";
+        this.mdTxt = "";
+      }
+
+      loadItem() {
+        if (!this.mdDatas.has(this.mdTitle)) {
+          alert("\u300C".concat(this.mdTitle, "\u300D\u304C\u5B58\u5728\u3057\u307E\u305B\u3093\u3002"));
+          return;
+        }
+
+        if (!confirm("\u300C".concat(this.mdTitle, "\u300D\u3092\u8AAD\u307F\u8FBC\u307F\u307E\u3059\u304B?"))) return;
+        this.mdTitleCurrent = this.mdTitle;
+        this.mdTxt = this.mdDatas.get(this.mdTitle);
+      }
+
+      saveItem() {
+        if (this.mdTitle == "") this.mdTitle = "default";
+
+        if (this.mdDatas.has(this.mdTitle)) {
+          if (this.mdTitleCurrent != this.mdTitle) {
+            if (!confirm("\u300C".concat(this.mdTitle, "\u300D\u3092\u4E0A\u66F8\u304D\u3057\u307E\u3059\u304B?"))) return;
+          }
+        } else {
+          this.mdDatas.set(this.mdTitle, this.mdTxt);
+        }
+
+        this.mdTitleCurrent = this.mdTitle;
+
+        _lib_Memory__WEBPACK_IMPORTED_MODULE_3__["Memory"].saveMap("mdTxts", this.mdDatas);
+      }
+
+      deleteItem() {
+        if (!this.mdDatas.has(this.mdTitle)) {
+          alert("\u300C".concat(this.mdTitle, "\u300D\u304C\u5B58\u5728\u3057\u307E\u305B\u3093\u3002"));
+          return;
+        }
+
+        if (!confirm("\u300C".concat(this.mdTitle, "\u300D\u3092\u524A\u9664\u3057\u307E\u3059\u304B?"))) return;
+        this.mdDatas.delete(this.mdTitle);
+
+        _lib_Memory__WEBPACK_IMPORTED_MODULE_3__["Memory"].saveMap("mdTxts", this.mdDatas);
+      }
+
+      viewFile() {
+        this.isViewFile = !this.isViewFile;
+      }
+
+      uploadFile() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+          const ele = document.getElementById("uploadFile");
+          const reader = new FileReader();
+          reader.readAsText(ele.files[0]);
+          yield new Promise(res => reader.addEventListener("load", res));
+          this.mdTxt = reader.result.toString();
+          this.mdTitle = ele.value.split(/\\|\//).pop();
+          ele.value = "";
+          this.isViewFile = false;
+        });
+      }
+
+      downloadMD() {
+        if (this.mdTitle == "") this.mdTitle = "default";
+        Object(_lib_Util__WEBPACK_IMPORTED_MODULE_2__["downloadText"])(this.mdTitle, this.mdTxt, ".md");
+      }
+
+      downloadHTML() {
+        if (this.mdTitle == "") this.mdTitle = "default";
+        Object(_lib_Util__WEBPACK_IMPORTED_MODULE_2__["downloadText"])(this.mdTitle, "<!DOCTYPE html>\n<html lang=ja>\n\n<head>\n\t<title>".concat(this.mdTitle, "</title>\n</head>\n\n<body>\n\t").concat(this.mdHtml.replace(/\n/g, "\n\t"), "\n</body>\n\n</html>\n"), ".html");
+      }
+
+    };
+
+    ToolMenuComponent.ctorParameters = () => [{
+      type: _store_service__WEBPACK_IMPORTED_MODULE_4__["StoreService"]
+    }];
+
+    ToolMenuComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: "ToolMenu",
+      template: template
+    })], ToolMenuComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/lib/Memory.ts":
+  /*!*******************************!*\
+    !*** ./src/app/lib/Memory.ts ***!
+    \*******************************/
+
+  /*! exports provided: Memory */
+
+  /***/
+  function srcAppLibMemoryTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "Memory", function () {
+      return Memory;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js"); //ローカルストレージの読み書き(Jsonとの相互変換対応)
+
+
+    class Memory {
+      //読込
+      static load(key) {
+        return JSON.parse(localStorage[key]);
+      } //保存
+
+
+      static save(key, memory) {
+        localStorage.setItem(key, JSON.stringify(memory));
+      } //削除
+
+
+      static remove(key) {
+        localStorage.removeItem(key);
+      } //Map読込
+
+
+      static loadMap(key) {
+        return Object.entries(this.load(key));
+      } //Map保存
+
+
+      static saveMap(key, map) {
+        const memory = {};
+        map.forEach((value, key) => memory[key] = value);
+        this.save(key, memory);
+      }
+
+    }
+    /***/
+
+  },
+
+  /***/
+  "./src/app/lib/Util.ts":
+  /*!*****************************!*\
+    !*** ./src/app/lib/Util.ts ***!
+    \*****************************/
+
+  /*! exports provided: SortedMap, downloadText */
+
+  /***/
+  function srcAppLibUtilTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "SortedMap", function () {
+      return SortedMap;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "downloadText", function () {
+      return downloadText;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+
+    class SortedMap extends Map {
+      has(key) {
+        return super.has(key);
+      }
+
+      set(key, value) {
+        if (this.has(key)) {
+          super.set(key, value);
+          return this;
+        }
+
+        const map = [...this.entries()];
+        map.push([key, value]);
+        map.sort();
+        this.clear();
+        map.forEach(([key, value]) => super.set(key, value));
+        return this;
+      }
+
+    }
+
+    function downloadText(txtName, txt, ext) {
+      const blob = new Blob([txt], {
+        type: "text/plain"
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      document.body.appendChild(a);
+      a.download = txtName + (txtName.slice(-ext.length) == ext ? "" : ext);
+      a.href = url;
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+    /***/
+
   },
 
   /***/
@@ -882,14 +1182,38 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
     var markdown_it__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(markdown_it__WEBPACK_IMPORTED_MODULE_2__);
+    /* harmony import */
+
+
+    var _store_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../store.service */
+    "./src/app/store.service.ts");
 
     const template = String.raw(_templateObject());
     let IndexComponent = class IndexComponent {
-      constructor() {
+      constructor(state) {
+        this.state = state;
         this.md = new markdown_it__WEBPACK_IMPORTED_MODULE_2__({
-          html: true
+          html: true,
+          linkify: true
         });
-        this.txt = "# TEST TITLE\n\n*<font color=#990000>Say</font>*\n**<u>Hello!</u>**\n\n```ts:\nfor(let i:number=0;i<100;i++){\n\tconsole.log(i);\n}\n```\n";
+      }
+
+      get mdTxt() {
+        return this.state.mdTxt;
+      }
+
+      set mdTxt(value) {
+        this.state.mdTxt = value;
+        this.state.mdHtml = this.mdHtml;
+      }
+
+      get mdHtml() {
+        return this.md.render(this.mdTxt.replace(/\n/g, "  \n"));
+      }
+
+      ngOnInit() {
+        this.mdTxt = "# TEST TITLE\n\n*<font color=#990000>Say</font>*\n**<u>Hello!</u>**\n\n```ts:\nfor(let i:number=0;i<100;i++){\n\tconsole.log(i);\n\n}\n```\n";
       }
 
       ngAfterViewChecked() {
@@ -898,10 +1222,60 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
       }
 
     };
+
+    IndexComponent.ctorParameters = () => [{
+      type: _store_service__WEBPACK_IMPORTED_MODULE_3__["StoreService"]
+    }];
+
     IndexComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: "Index",
       template: template
     })], IndexComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/store.service.ts":
+  /*!**********************************!*\
+    !*** ./src/app/store.service.ts ***!
+    \**********************************/
+
+  /*! exports provided: StoreService */
+
+  /***/
+  function srcAppStoreServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "StoreService", function () {
+      return StoreService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+
+    let StoreService = class StoreService {
+      constructor() {
+        this.mdTxt = "";
+        this.mdHtml = "";
+      }
+
+    };
+    StoreService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: "root"
+    })], StoreService);
     /***/
   },
 

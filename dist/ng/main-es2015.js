@@ -320,10 +320,20 @@ __webpack_require__.r(__webpack_exports__);
 
 const template = `
 <main>
-	<NavMenu></NavMenu>
+	<header>
+		<ToolMenu></ToolMenu>
+		<NavMenu></NavMenu>
+	</header>
 	<hr>
 	<router-outlet></router-outlet>
 </main>
+
+<style>
+header{
+	display: flex;
+	justify-content: space-between;
+}
+</style>
 `;
 
 let AppComponent = class AppComponent {
@@ -357,7 +367,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _pages_Index_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Index.component */ "./src/app/pages/Index.component.ts");
-/* harmony import */ var _components_NavMenu_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/NavMenu.component */ "./src/app/components/NavMenu.component.ts");
+/* harmony import */ var _components_ToolMenu_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ToolMenu.component */ "./src/app/components/ToolMenu.component.ts");
+/* harmony import */ var _components_NavMenu_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/NavMenu.component */ "./src/app/components/NavMenu.component.ts");
+
 
 
 
@@ -374,7 +386,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
             _pages_Index_component__WEBPACK_IMPORTED_MODULE_7__["IndexComponent"],
-            _components_NavMenu_component__WEBPACK_IMPORTED_MODULE_8__["NavMenuComponent"],
+            _components_ToolMenu_component__WEBPACK_IMPORTED_MODULE_8__["ToolMenuComponent"],
+            _components_NavMenu_component__WEBPACK_IMPORTED_MODULE_9__["NavMenuComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -406,7 +419,6 @@ __webpack_require__.r(__webpack_exports__);
 
 const template = `
 <nav>
-	<b style="color:#900;font-size:1.5em;">MD EDIT</b>{{" "}}
 	<a href="../">Vanilla</a>{{" "}}
 	<a [href]="ve">Vue.js</a>{{" "}}
 	<a [href]="br">Blazor</a>{{" "}}
@@ -437,6 +449,245 @@ NavMenuComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/components/ToolMenu.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/components/ToolMenu.component.ts ***!
+  \**************************************************/
+/*! exports provided: ToolMenuComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToolMenuComponent", function() { return ToolMenuComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _lib_Util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/Util */ "./src/app/lib/Util.ts");
+/* harmony import */ var _lib_Memory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/Memory */ "./src/app/lib/Memory.ts");
+/* harmony import */ var _store_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store.service */ "./src/app/store.service.ts");
+
+const template = `
+<div style=display:flex>
+	<img src="./favicon.ico" height=32 width=32 style=image-rendering:pixelated>
+	<button (click)="newItem()">❇新規</button>
+	<input placeholder=" [題名]" list="mdDatas" [(ngModel)]="mdTitle">
+	<datalist id="mdDatas">
+		<option  *ngFor="let v of mdDatas | keyvalue">{{v.key}}</option>
+	</datalist>
+	<button (click)="loadItem()">📖読込</button>
+	<button (click)="saveItem()">💾保存</button>
+	<button (click)="deleteItem()">🚫削除</button>
+	<button (click)="viewFile()">📂開く</button>
+	<input type="file" accept=".md" id="uploadFile" (change)="uploadFile()" [style.display]="isViewFile? '': 'none'">
+	<button (click)="downloadMD()">📲Markdown</button>
+	<button (click)="downloadHTML()">📲HTML</button>
+</div>
+
+<style>
+.active{
+	color: #FF0000;
+	font-weight: bold;
+}
+</style>
+`;
+
+
+
+
+let ToolMenuComponent = class ToolMenuComponent {
+    constructor(state) {
+        this.state = state;
+        this.mdDatas = new _lib_Util__WEBPACK_IMPORTED_MODULE_2__["SortedMap"]();
+        this.mdTitleCurrent = "";
+        this.mdTitle = "";
+        this.isViewFile = false;
+    }
+    get mdTxt() { return this.state.mdTxt; }
+    set mdTxt(value) { this.state.mdTxt = value; }
+    get mdHtml() { return this.state.mdHtml; }
+    ngOnInit() {
+        try {
+            this.mdDatas = new _lib_Util__WEBPACK_IMPORTED_MODULE_2__["SortedMap"](_lib_Memory__WEBPACK_IMPORTED_MODULE_3__["Memory"].loadMap("mdTxts"));
+        }
+        catch (_a) { }
+    }
+    newItem() {
+        if (!confirm("初期化してもよろしいですか?"))
+            return;
+        this.mdTitleCurrent = "";
+        this.mdTitle = "";
+        this.mdTxt = "";
+    }
+    loadItem() {
+        if (!this.mdDatas.has(this.mdTitle)) {
+            alert(`「${this.mdTitle}」が存在しません。`);
+            return;
+        }
+        if (!confirm(`「${this.mdTitle}」を読み込みますか?`))
+            return;
+        this.mdTitleCurrent = this.mdTitle;
+        this.mdTxt = this.mdDatas.get(this.mdTitle);
+    }
+    saveItem() {
+        if (this.mdTitle == "")
+            this.mdTitle = "default";
+        if (this.mdDatas.has(this.mdTitle)) {
+            if (this.mdTitleCurrent != this.mdTitle) {
+                if (!confirm(`「${this.mdTitle}」を上書きしますか?`))
+                    return;
+            }
+        }
+        else {
+            this.mdDatas.set(this.mdTitle, this.mdTxt);
+        }
+        this.mdTitleCurrent = this.mdTitle;
+        _lib_Memory__WEBPACK_IMPORTED_MODULE_3__["Memory"].saveMap("mdTxts", this.mdDatas);
+    }
+    deleteItem() {
+        if (!this.mdDatas.has(this.mdTitle)) {
+            alert(`「${this.mdTitle}」が存在しません。`);
+            return;
+        }
+        if (!confirm(`「${this.mdTitle}」を削除しますか?`))
+            return;
+        this.mdDatas.delete(this.mdTitle);
+        _lib_Memory__WEBPACK_IMPORTED_MODULE_3__["Memory"].saveMap("mdTxts", this.mdDatas);
+    }
+    viewFile() {
+        this.isViewFile = !this.isViewFile;
+    }
+    uploadFile() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const ele = document.getElementById("uploadFile");
+            const reader = new FileReader();
+            reader.readAsText(ele.files[0]);
+            yield new Promise(res => reader.addEventListener("load", res));
+            this.mdTxt = reader.result.toString();
+            this.mdTitle = ele.value.split(/\\|\//).pop();
+            ele.value = "";
+            this.isViewFile = false;
+        });
+    }
+    downloadMD() {
+        if (this.mdTitle == "")
+            this.mdTitle = "default";
+        Object(_lib_Util__WEBPACK_IMPORTED_MODULE_2__["downloadText"])(this.mdTitle, this.mdTxt, ".md");
+    }
+    downloadHTML() {
+        if (this.mdTitle == "")
+            this.mdTitle = "default";
+        Object(_lib_Util__WEBPACK_IMPORTED_MODULE_2__["downloadText"])(this.mdTitle, `<!DOCTYPE html>
+<html lang=ja>
+
+<head>
+	<title>${this.mdTitle}</title>
+</head>
+
+<body>
+	${this.mdHtml.replace(/\n/g, "\n\t")}
+</body>
+
+</html>
+`, ".html");
+    }
+};
+ToolMenuComponent.ctorParameters = () => [
+    { type: _store_service__WEBPACK_IMPORTED_MODULE_4__["StoreService"] }
+];
+ToolMenuComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: "ToolMenu",
+        template: template
+    })
+], ToolMenuComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/lib/Memory.ts":
+/*!*******************************!*\
+  !*** ./src/app/lib/Memory.ts ***!
+  \*******************************/
+/*! exports provided: Memory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Memory", function() { return Memory; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+
+//ローカルストレージの読み書き(Jsonとの相互変換対応)
+class Memory {
+    //読込
+    static load(key) {
+        return JSON.parse(localStorage[key]);
+    }
+    //保存
+    static save(key, memory) {
+        localStorage.setItem(key, JSON.stringify(memory));
+    }
+    //削除
+    static remove(key) {
+        localStorage.removeItem(key);
+    }
+    //Map読込
+    static loadMap(key) {
+        return Object.entries(this.load(key));
+    }
+    //Map保存
+    static saveMap(key, map) {
+        const memory = {};
+        map.forEach((value, key) => memory[key] = value);
+        this.save(key, memory);
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/app/lib/Util.ts":
+/*!*****************************!*\
+  !*** ./src/app/lib/Util.ts ***!
+  \*****************************/
+/*! exports provided: SortedMap, downloadText */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortedMap", function() { return SortedMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "downloadText", function() { return downloadText; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+
+class SortedMap extends Map {
+    has(key) { return super.has(key); }
+    set(key, value) {
+        if (this.has(key)) {
+            super.set(key, value);
+            return this;
+        }
+        const map = [...this.entries()];
+        map.push([key, value]);
+        map.sort();
+        this.clear();
+        map.forEach(([key, value]) => super.set(key, value));
+        return this;
+    }
+}
+function downloadText(txtName, txt, ext) {
+    const blob = new Blob([txt], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    document.body.appendChild(a);
+    a.download = txtName + (txtName.slice(-ext.length) == ext ? "" : ext);
+    a.href = url;
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+}
+
+
+/***/ }),
+
 /***/ "./src/app/pages/Index.component.ts":
 /*!******************************************!*\
   !*** ./src/app/pages/Index.component.ts ***!
@@ -451,12 +702,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var markdown_it__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! markdown-it */ "./node_modules/markdown-it/index.js");
 /* harmony import */ var markdown_it__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(markdown_it__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _store_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store.service */ "./src/app/store.service.ts");
 
 const template = String.raw `
 <div id=index>
-	<textarea [(ngModel)]="txt"></textarea>
+	<textarea [(ngModel)]="mdTxt"></textarea>
 	<hr>
-	<div [innerHTML]="md.render(txt.split('\n').join('  \n'))"></div>
+	<div [innerHTML]="mdHtml"></div>
 </div>
 
 <style>
@@ -484,10 +736,21 @@ div#index{
 `;
 
 
+
 let IndexComponent = class IndexComponent {
-    constructor() {
-        this.md = new markdown_it__WEBPACK_IMPORTED_MODULE_2__({ html: true });
-        this.txt = `# TEST TITLE
+    constructor(state) {
+        this.state = state;
+        this.md = new markdown_it__WEBPACK_IMPORTED_MODULE_2__({ html: true, linkify: true });
+    }
+    get mdTxt() { return this.state.mdTxt; }
+    set mdTxt(value) {
+        this.state.mdTxt = value;
+        this.state.mdHtml = this.mdHtml;
+    }
+    get mdHtml() { return this.md.render(this.mdTxt.replace(/\n/g, "  \n")); }
+    ngOnInit() {
+        this.mdTxt =
+            `# TEST TITLE
 
 *<font color=#990000>Say</font>*
 **<u>Hello!</u>**
@@ -495,6 +758,7 @@ let IndexComponent = class IndexComponent {
 \`\`\`ts:
 for(let i:number=0;i<100;i++){
 	console.log(i);
+
 }
 \`\`\`
 `;
@@ -504,12 +768,45 @@ for(let i:number=0;i<100;i++){
         hljs.initHighlighting();
     }
 };
+IndexComponent.ctorParameters = () => [
+    { type: _store_service__WEBPACK_IMPORTED_MODULE_3__["StoreService"] }
+];
 IndexComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: "Index",
         template: template
     })
 ], IndexComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/store.service.ts":
+/*!**********************************!*\
+  !*** ./src/app/store.service.ts ***!
+  \**********************************/
+/*! exports provided: StoreService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StoreService", function() { return StoreService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let StoreService = class StoreService {
+    constructor() {
+        this.mdTxt = "";
+        this.mdHtml = "";
+    }
+};
+StoreService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: "root"
+    })
+], StoreService);
 
 
 

@@ -1,6 +1,5 @@
 <template>
 <nav>
-	<b style="color:#090;font-size:1.5em;">MD EDIT</b>{{" "}}
 	<a href="../">Vanilla</a>{{" "}}
 	<router-link to="/">Vue.js</router-link>{{" "}}
 	<a :href="br">Blazor</a>{{" "}}

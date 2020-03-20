@@ -1,8 +1,8 @@
 <template>
 <div id=index>
-	<textarea v-model="txt"></textarea>
+	<textarea v-model="mdTxt"></textarea>
 	<hr>
-	<div v-html="md.render(txt.replace(/\n/g,'  \n'))"></div>
+	<div v-html="mdHtml"></div>
 </div>
 </template>
 
@@ -34,12 +34,21 @@ div#index{
 <script lang=ts>
 import {Component,Vue} from "vue-property-decorator";
 import MarkdownIt from "markdown-it";
+import store from "@/store/";
 declare var hljs:any;
 
 @Component
 export default class InnerHTML extends Vue{
-	md=new MarkdownIt({html: true});
-	txt=
+	md=new MarkdownIt({html: true,linkify: true});
+	get mdTxt():string{return store.state.mdTxt;}
+	set mdTxt(value:string){
+		store.commit("setMdTxt",value);
+		store.commit("setMdHtml",this.mdHtml);
+	}
+	get mdHtml(){return this.md.render(this.mdTxt.replace(/\n/g,"  \n"));}
+
+	mounted(){
+		this.mdTxt=
 `# TEST TITLE
 
 *<span style=color:#009900>Say</span>*
@@ -51,6 +60,7 @@ for(let i:number=0;i<100;i++){
 }
 \`\`\`
 `;
+	}
 
 	updated(){
 		hljs.initHighlighting.called=false;

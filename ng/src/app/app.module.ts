@@ -7,13 +7,15 @@ import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
 
 import {IndexComponent} from "./pages/Index.component";
+import {ToolMenuComponent} from "./components/ToolMenu.component";
 import {NavMenuComponent} from "./components/NavMenu.component";
 
 @NgModule({
 	declarations:[
 		AppComponent,
 		IndexComponent,
-		NavMenuComponent,
+		ToolMenuComponent,
+		NavMenuComponent
 	],
 	imports:[
 		BrowserModule,
