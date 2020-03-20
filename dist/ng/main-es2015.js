@@ -582,12 +582,14 @@ let ToolMenuComponent = class ToolMenuComponent {
 	<title>${this.mdTitle}</title>
 	<link rel=stylesheet href="https://unpkg.com/karma-css@latest/dist/karma.min.css">
 	<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Kosugi&display=swap">
+	<link rel=stylesheet href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/vs.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
 	<style>code{font-family: "Kosugi",sans-serif;}</style>
 </head>
 
 <body>
 	${this.mdHtml.replace(/\n/g, "\n\t")}
+	<script>hljs.initHighlighting();</script>
 </body>
 
 </html>
