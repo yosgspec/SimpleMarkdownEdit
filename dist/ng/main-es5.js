@@ -995,7 +995,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
       downloadHTML() {
         if (this.mdTitle == "") this.mdTitle = "default";
-        Object(_lib_Util__WEBPACK_IMPORTED_MODULE_2__["downloadText"])(this.mdTitle, "<!DOCTYPE html>\n<html lang=ja>\n\n<head>\n\t<title>".concat(this.mdTitle, "</title>\n</head>\n\n<body>\n\t").concat(this.mdHtml.replace(/\n/g, "\n\t"), "\n</body>\n\n</html>\n"), ".html");
+        Object(_lib_Util__WEBPACK_IMPORTED_MODULE_2__["downloadText"])(this.mdTitle, "<!DOCTYPE html>\n<html lang=ja>\n\n<head>\n\t<title>".concat(this.mdTitle, "</title>\n\t<link rel=stylesheet href=\"https://unpkg.com/karma-css@latest/dist/karma.min.css\">\n\t<link rel=stylesheet href=\"https://fonts.googleapis.com/css?family=Kosugi&display=swap\">\n\t<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js\"></script>\n\t<style>code{font-family: \"Kosugi\",sans-serif;}</style>\n</head>\n\n<body>\n\t").concat(this.mdHtml.replace(/\n/g, "\n\t"), "\n</body>\n\n</html>\n"), ".html");
       }
 
     };

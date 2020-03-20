@@ -103,6 +103,10 @@ export default class ToolMenu extends Vue{
 
 <head>
 	<title>${this.mdTitle}</title>
+	<link rel=stylesheet href="https://unpkg.com/karma-css@latest/dist/karma.min.css">
+	<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Kosugi&display=swap">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"><${""}/script>
+	<style>code{font-family: "Kosugi",sans-serif;}</style>
 </head>
 
 <body>
