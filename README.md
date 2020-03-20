@@ -29,6 +29,12 @@ mdファイルをアップロードしてエディタで編集を行うことが
 ## ソース
 [GitHub](https://github.com/yosgspec/SimpleMarkdownEdit)にて管理しています。
 ライセンスはCC0としていますので自由に改変等してください。
+ただし、下記の使用ライブラリについてはそれぞれライセンスを参照してください。
+
+### ライブラリ
+[highlight.js](https://highlightjs.org/)
+[markdown-it](https://github.com/markdown-it/markdown-it)
+[markdig](https://github.com/lunet-io/markdig)
 
 ## お問い合わせ
 YOS G-spec
