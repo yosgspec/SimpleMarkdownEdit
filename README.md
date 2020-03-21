@@ -5,10 +5,10 @@
   
 ## エディション  
 異なるソースベースを持つ4つのエディションがあります。  
-* [Vanilla版](/mdedit/) (プレーンなhtml+JavaScript)  
-* [Vue.js版](/mdedit/ve/) ([フレームワーク](https://jp.vuejs.org/))  
-* [Blazor版](/mdedit/br/) ([フレームワーク](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor))  
-* [Andular版](/mdedit/ng/) ([フレームワーク](https://angular.jp/))  
+* [Vanilla版](http://tool.yosgspec.com/mdedit/) (プレーンなhtml+JavaScript)  
+* [Vue.js版](http://tool.yosgspec.com/mdedit/ve/) ([フレームワーク](https://jp.vuejs.org/))  
+* [Blazor版](http://tool.yosgspec.com/mdedit/br/) ([フレームワーク](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor))  
+* [Andular版](http://tool.yosgspec.com/mdedit/ng/) ([フレームワーク](https://angular.jp/))  
   
 機能的にはどれも変わりませんのでわからなければVue.js版を使用してください。  
 (ただしVanilla版のみ明確に機能が劣ります)  
